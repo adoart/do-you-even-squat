@@ -37,9 +37,9 @@ public class JumpProvider : MonoBehaviour
 
         Jump(forceVector);
 
-        //Debug.DrawLine(forwardSource.localPosition, Vector3.up, Color.yellow);
+        Debug.DrawLine(transform.position, movementY, Color.yellow);
         Debug.DrawLine(transform.position, forceVector, Color.red);
-        //Debug.DrawLine(forwardSource.localPosition, movementZ, Color.blue);
+        Debug.DrawLine(transform.position, movementZ, Color.blue);
 
     }
 
