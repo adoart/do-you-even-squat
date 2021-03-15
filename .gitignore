@@ -2,16 +2,27 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+/[Aa]ssets/Plugins/
+/[Aa]ssets/TextMesh Pro/
+/[Aa]ssets/Samples/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
+/[Bb]ackups/
+/[Rr]ecordings/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/.idea/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+/[Aa]ssets/Plugins.meta
+/[Aa]ssets/TextMesh Pro.meta
+/[Aa]ssets/Samples.meta
+/[Aa]ssets/[Bb]ackups.meta
+/[Aa]ssets/[Rr]ecordings.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*

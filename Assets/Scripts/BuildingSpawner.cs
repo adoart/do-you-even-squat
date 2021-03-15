@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildingSpawner : MonoBehaviour
 {
+    public int numTries = 3;
     public List<GameObject> buildings;
     public float radius;
     public float checkRadius = 0.0f;
@@ -37,7 +38,7 @@ public class BuildingSpawner : MonoBehaviour
         foreach (GameObject building in buildings) {
             bool spawned = false;
             int tries = 0;
-            while (!spawned && tries <= 3) {
+            while (!spawned && tries < numTries) {
                 Vector2 position2D = Random.insideUnitCircle * radius;
                 Vector3 position = new Vector3(transform.position.x + position2D.x, 15.0f, transform.position.z + position2D.y);
                 float checkSphereRadius = checkRadius > 0.0f ? checkRadius : new Vector2(building.transform.localScale.x, building.transform.localScale.z).magnitude;

@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class JumpProvider : MonoBehaviour
-{
+public class JumpProvider : MonoBehaviour {
     // public variables
     public float jumpForce = 30.0f;
     public float forwardForce = 3.0f;
@@ -18,6 +17,7 @@ public class JumpProvider : MonoBehaviour
 
     private List<InputDevice> inputDevices = new List<InputDevice>();
     public bool isPressed = false;
+    [SerializeField] private Vector3 positionOffSet;
 
     // Start is called before the first frame update
     void Start() {
@@ -31,23 +31,25 @@ public class JumpProvider : MonoBehaviour
     // Update is called once per frame
     void Update() {
         // Determine how much should move in the z-direction
-        Vector3 movementZ = transform.forward * forwardForce;
-        Vector3 movementY = transform.up * jumpForce;
+        Vector3 movementZ = forwardSource.transform.forward * forwardForce;
+        Vector3 movementY = Vector3.up * jumpForce;
         Vector3 forceVector = movementY + movementZ;
+
+        if (grounded) {
+            DrawTrajectory.Instance.UpdateTrajectory(forceVector, myBody,
+                forwardSource.transform.position + positionOffSet);
+        }
 
         Jump(forceVector);
 
-        Debug.DrawLine(transform.position, movementY, Color.yellow);
-        Debug.DrawLine(transform.position, forceVector, Color.red);
-        Debug.DrawLine(transform.position, movementZ, Color.blue);
-
+        Debug.DrawLine(forwardSource.position, forwardSource.position + movementY, Color.yellow);
+        Debug.DrawLine(forwardSource.position, forwardSource.position + forceVector, Color.red);
+        Debug.DrawLine(forwardSource.position, forwardSource.position + movementZ, Color.blue);
     }
 
     private void Jump(Vector3 forceVector) {
-
         foreach (InputDevice inputDevice in inputDevices) {
             if (inputDevice.isValid) {
-
                 InputHelpers.IsPressed(inputDevice, InputHelpers.Button.PrimaryButton, out isPressed);
                 if (grounded && isPressed) {
                     Debug.Log("JUMP");
